@@ -51,4 +51,3 @@ void findMinElementInTriangle(int** matrix, int N) {
     }
     cout << min;
 }
-/////////анрпрслпоод
