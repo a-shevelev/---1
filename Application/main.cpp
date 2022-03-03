@@ -1,9 +1,9 @@
 ﻿#include <iostream>
 #include <ctime>
 #include <iomanip>
+using namespace std;
 #include "matrix.h"
 
-using namespace std;
 
 int main()
 {
@@ -13,13 +13,12 @@ int main()
     cout << "Введите количество строк и столбцов: ";
     cin >> N;
     int** matrix = createMatrix(N);
-    //aazdasd
     printMatrix(matrix, N);
     findGreatestElementWithEvenNumInColumn(matrix, N);
+    afon_postaralsya(matrix, N);
     findMinElementInTriangle(matrix, N);
     return 0;
 }
-
 
 
 
