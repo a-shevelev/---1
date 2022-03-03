@@ -13,6 +13,7 @@ int main()
     cout << "Введите количество строк и столбцов: ";
     cin >> N;
     int** matrix = createMatrix(N);
+    //aazdasd
     printMatrix(matrix, N);
     findGreatestElementWithEvenNumInColumn(matrix, N);
     findMinElementInTriangle(matrix, N);
