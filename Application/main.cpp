@@ -18,7 +18,6 @@ int main()
     findMinElementInTriangle(matrix, N);
     return 0;
 }
-//kufxgdkjhf
 
 
 
