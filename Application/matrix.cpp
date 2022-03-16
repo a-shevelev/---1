@@ -1,42 +1,43 @@
 #pragma once
 #include <iostream>
 #include <iomanip>
-using namespace std;
 #include "matrix.h"
+#define RANDOM_MIN -6 
+#define RANDOM_MAX 6 
+using namespace std;
 
-int** createMatrix(int N) {
-    int** matrix = new int* [N] {};
-    for (int i = 0; i < N; i++) {
-        matrix[i] = new int [N] {};
+int** CreateMatrix(int MATRIX_SIZE) {
+    int** matrix = new int* [MATRIX_SIZE] {};
+    for (int i = 0; i < MATRIX_SIZE; i++) {
+        matrix[i] = new int [MATRIX_SIZE] {}; 
     }
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            matrix[i][j] = rand() % 13 - 6;
+    for (int i = 0; i < MATRIX_SIZE; i++) {
+        for (int j = 0; j < MATRIX_SIZE; j++) {
+            matrix[i][j] = rand() % ((RANDOM_MAX - RANDOM_MIN)+1) + RANDOM_MIN;
         }
     }
     return matrix;
 };
-void printMatrix(int** matrix, int N) {
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
+void PrintMatrix(int** matrix, int MATRIX_SIZE) {
+    for (int i = 0; i < MATRIX_SIZE; i++) {
+        for (int j = 0; j < MATRIX_SIZE; j++) {
             cout << setw(5) << matrix[i][j];
         }
         cout << endl;
     }
     cout << endl;
 };
-void findGreatestElementWithEvenNumInColumn(int** matrix, int N) {
+void FindGreatestElementWithEvenNumInColumn(int** matrix, int MATRIX_SIZE) {
     cout << endl << "A)" << endl;
-    int max = -10;
-    for (int i = 0; i < N; i++) {
-        int max = -10;
-        for (int j = 0; j < N; j++) {
-            if ((matrix[j][i] > max) && ((i + 1) % 2 == 0)) {
-                max = matrix[j][i];
+    for (int i = 0; i < MATRIX_SIZE; i++) {
+        int maxValue = RANDOM_MIN -1;
+        for (int j = 0; j < MATRIX_SIZE; j++) {
+            if ((matrix[j][i] > maxValue) && ((i + 1) % 2 == 0)) {
+                maxValue = matrix[j][i];
             }
         }
-        if (max != -10) {
-            cout << setw(5) << max;
+        if (maxValue != RANDOM_MIN -1) {
+            cout << setw(5) << maxValue;
         }
         else {
             cout << setw(5) << "-";
@@ -44,64 +45,57 @@ void findGreatestElementWithEvenNumInColumn(int** matrix, int N) {
     }
     cout << endl;
 };
-void afon_postaralsya(int** matrix, int N) {
+void FindRiseChainMinMaxInline(int** matrix, int MATRIX_SIZE) {
+    bool noOneTrue{ true };
     cout << endl << "Б)" << endl;
-    for (int i{}; i < N; i++) {
-        int max = -100;
-        int min = 100;
-        int min_j{}, max_j{}, flag{ 0 }, k{ 0 };
-        for (int j{}; j < N; j++) {
-            if (matrix[i][j] > max) {
-                max = matrix[i][j];
-                max_j = j;
+    for (int i{}; i < MATRIX_SIZE; i++) {
+        int maxValue = RANDOM_MIN-1;
+        int minValue = RANDOM_MAX+1;
+        int minInLine{}, maxInLine{}, countOfFalseElements{ 0 };
+        bool flag{false};
+        for (int j{}; j < MATRIX_SIZE; j++) {
+            if (matrix[i][j] > maxValue) {
+                maxValue = matrix[i][j];
+                maxInLine = j;
             }
-            if (matrix[i][j] < min) {
-                min = matrix[i][j];
-                min_j = j;
+            if (matrix[i][j] < minValue) {
+                minValue = matrix[i][j];
+                minInLine = j;
             }
         }
-        if (min_j > max_j) {
-            for (int temp{ max_j + 2 }; temp < min_j; temp++) {
-                if (matrix[i][temp] <= matrix[i][temp - 1]) {
-                    k++;
-                }
-                if (k == 0) {
-                    flag = 1;
+        if (minInLine+2 < maxInLine) {
+            for (int j{ minInLine + 2 }; j < maxInLine; j++) {
+                if (matrix[i][j] <= matrix[i][j - 1]) {
+                    countOfFalseElements++;
                 }
             }
-
-
-        }
-        else {
-            for (int temp{ min_j + 2 }; temp < max_j; temp++) {
-                if (matrix[i][temp] <= matrix[i][temp - 1]) {
-                    k++;
-                }
-                if (k == 0) {
-                    flag = 1;
-                }
+            if (countOfFalseElements == 0) {
+                flag = true;
             }
-
-
+           
         }
-        if (flag == 1) {
+        if (flag == true) {
+            noOneTrue = false;
             cout << endl << setw(2) << i + 1 << ")";
-            for (int temp{}; temp < N; temp++) {
-                cout << setw(5) << matrix[i][temp];
+            for (int j{}; j < MATRIX_SIZE; j++) {
+                cout << setw(5) << matrix[i][j];
             }
-            cout << endl << min_j << "   " << max_j << endl;
+            cout << endl;
         }
+    }
+    if (noOneTrue == true) {
+        cout << "Таких строк нет."<<endl;
     }
 };
-void findMinElementInTriangle(int** matrix, int N) {
-    cout << endl << "В)" << endl;
-    int min = 10;
-    for (int i = N / 2; i < N; i++) {
-        for (int j = N - i - 1; j <= i; j++) {
-            if (matrix[i][j] < min) {
-                min = matrix[i][j];
+void FindMinElementInTriangle(int** matrix, int MATRIX_SIZE) {
+    cout << endl << "В)";
+    int minValue = RANDOM_MAX+1;
+    for (int i = MATRIX_SIZE / 2; i < MATRIX_SIZE; i++) {
+        for (int j = MATRIX_SIZE - i - 1; j <= i; j++) {
+            if (matrix[i][j] < minValue) {
+                minValue = matrix[i][j];
             }
         }
     }
-    cout << endl << min;
+    cout << endl << minValue;
 };

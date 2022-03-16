@@ -1,22 +1,21 @@
 ﻿#include <iostream>
 #include <ctime>
 #include <iomanip>
-using namespace std;
 #include "matrix.h"
 
+#define MATRIX_SIZE 14
 
+
+using namespace std;
 int main()
 {
     setlocale(LC_ALL, "RUS");
     srand(time(0));
-    int N{};
-    cout << "Введите количество строк и столбцов: ";
-    cin >> N;
-    int** matrix = createMatrix(N);
-    printMatrix(matrix, N);
-    findGreatestElementWithEvenNumInColumn(matrix, N);
-    afon_postaralsya(matrix, N);
-    findMinElementInTriangle(matrix, N);
+    int** matrix = CreateMatrix(MATRIX_SIZE);
+    PrintMatrix(matrix, MATRIX_SIZE);
+    FindGreatestElementWithEvenNumInColumn(matrix, MATRIX_SIZE);
+    FindRiseChainMinMaxInline(matrix, MATRIX_SIZE);
+    FindMinElementInTriangle(matrix, MATRIX_SIZE);
     return 0;
 }
 
